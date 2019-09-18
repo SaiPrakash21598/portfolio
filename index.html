@@ -1,0 +1,721 @@
+<!DOCTYPE html> 
+<html> 
+<head> 
+<meta charset="utf-8"> 
+<meta name="viewport" content="width=device-width, initial-scale=1"> 
+<link rel="stylesheet"href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+<link href="https://fonts.googleapis.com/css?family=Montserrat&display=swap" rel="stylesheet"> 
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"> </script> 
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"> </script> 
+
+<style> 
+
+body 
+{ 
+	position: relative;
+	    word-break: break-all;
+		font-family: 'Montserrat', sans-serif;
+} 
+.timeline
+{
+  --uiTimelineMainColor: var(--timelineMainColor, #222);
+  --uiTimelineSecondaryColor: var(--timelineSecondaryColor, #fff);
+
+  position: relative;
+  padding-top: 3rem;
+  padding-bottom: 3rem;
+}
+
+.timeline:before{
+  content: "";
+  width: 4px;
+  height: 100%;
+  background-color: var(--uiTimelineMainColor);
+
+  position: absolute;
+  top: 0;
+}
+
+.timeline__group
+{
+  position: relative;
+}
+
+.timeline__group:not(:first-of-type){
+  margin-top: 4rem;
+}
+
+.timeline__year
+{
+  padding: .5rem 1.5rem;
+  color: var(--uiTimelineSecondaryColor);
+  background-color: var(--uiTimelineMainColor);
+
+  position: absolute;
+  left: 0;
+  top: 0;
+}
+
+.timeline__box{
+  position: relative;
+}
+
+.timeline__box:not(:last-of-type){
+  margin-bottom: 30px;
+}
+
+.timeline__box:before{
+  content: "";
+  width: 100%;
+  height: 2px;
+  background-color: var(--uiTimelineMainColor);
+
+  position: absolute;
+  left: 0;
+  z-index: 0;
+}
+
+.timeline__date{
+  min-width: 65px;
+  position: absolute;
+  left: 0;
+
+  box-sizing: border-box;
+  padding: .5rem 1.5rem;
+  text-align: center;
+
+  background-color: var(--uiTimelineMainColor);
+  color: var(--uiTimelineSecondaryColor);
+}
+
+.timeline__day{
+  font-size: 2rem;
+  font-weight: 700;
+  display: block;
+}
+
+.timeline__month{
+  display: block;
+  font-size: .8em;
+  text-transform: uppercase;
+}
+
+.timeline__post{
+  padding: 1.5rem 2rem;
+  border-radius: 2px;
+  border-left: 3px solid var(--uiTimelineMainColor);
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, .12), 0 1px 2px 0 rgba(0, 0, 0, .24);
+  background-color: var(--uiTimelineSecondaryColor);
+  position:relative;
+}
+
+@media screen and (min-width: 641px){
+
+  .timeline:before
+  {
+    left: 0px;
+  }
+
+  .timeline__group
+  {
+    padding-top: 55px;
+  }
+
+  .timeline__box
+  {
+    padding-left: 80px;
+  }
+
+  .timeline__box:before
+  {
+    top: 50%;
+    transform: translateY(-50%);  
+  }  
+
+  }
+
+@media screen and (max-width: 640px)
+{
+
+  .timeline:before
+  {
+    left: 0;
+  }
+
+  .timeline__group
+  {
+    padding-top: 40px;
+  }
+
+  .timeline__box
+  {
+    padding-left: 20px;
+    padding-top: 70px;
+  }
+
+  .timeline__box:before
+  {
+    top: 50px;
+  }    
+
+  
+}
+
+.timeline
+{
+  --timelineMainColor: orange;
+  font-size: 16px;
+}
+
+
+
+@media (min-width: 768px){
+
+  html
+  {
+    font-size: 62.5%;
+  }
+}
+
+@media (max-width: 767px){
+
+  html
+  {
+    font-size: 55%;
+  }
+}
+
+body
+{
+  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Open Sans, Ubuntu, Fira Sans, Helvetica Neue, sans-serif;
+  font-size: 1.6rem;
+  color: #222;
+
+  background-color:#101010;
+  margin: 0;
+  -webkit-overflow-scrolling: touch;   
+  overflow-y: scroll;
+}
+
+p
+{
+  margin-top: 0;
+  margin-bottom: 1.5rem;
+  line-height: 1.5;
+}
+
+p:last-child{
+  margin-bottom: 0;
+}
+
+.page
+{
+  max-width: 800px;
+  padding: 3rem 2rem 3rem;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.rw-wrapper
+{
+	width: 90%;
+	position: relative;
+	margin: 60px auto 0 auto;
+	padding: 30px;
+	overflow: hidden;
+}
+.rw-sentence
+{
+	margin: 0;
+	text-align: left;
+	text-shadow: 1px 1px 1px rgba(255,255,255,0.8);
+}
+
+.rw-sentence span
+{
+	color: #444;
+	white-space: nowrap;
+	font-size: 25px;
+	font-weight: normal;
+	
+}
+
+.rw-words
+{
+	display: inline;
+	text-indent: 10px;
+    padding-right: 20px;
+}
+
+.rw-words span
+{
+	position: absolute;
+	opacity: 0;
+	overflow: hidden;
+	width: 100%;
+	color: #6b969d;
+	
+}
+.rw-words-1 span
+{
+	animation: rotateWordsFirst 9s linear infinite 0s;
+}
+.rw-words-2 span{
+	animation: rotateWordsSecond 9s linear infinite 0s;
+}
+.rw-words span:nth-child(2) 
+{ 
+	animation-delay: 3s; 
+	color: #6b889d;
+}
+.rw-words span:nth-child(3) 
+{ 
+	animation-delay: 3s; 
+	color: #6b739d;	
+}
+
+
+@keyframes rotateWordsFirst 
+{
+    0% { opacity: 1; animation-timing-function: ease-in; height: 0px; }
+    8% { opacity: 1; height: 60px; }
+    19% { opacity: 1; height: 60px; }
+	25% { opacity: 0; height: 60px; }
+    100% { opacity: 0; }
+}
+
+@keyframes rotateWordsSecond {
+    0% { opacity: 1; animation-timing-function: ease-in; width: 0px; }
+    10% { opacity: 0.3; width: 0px; }
+	20% { opacity: 1; width: 100%; }
+    27% { opacity: 0; width: 100%; }
+    100% { opacity: 0; }
+}
+
+
+
+th,tr
+{
+  padding: 20px;
+}
+
+
+.progress 
+{
+width: 300px !important;
+height: 10px !important;
+
+
+}
+
+#section1 
+{
+padding-top:70px;
+height:500px;
+color: black;
+background-color: black;
+padding-bottom:90px;
+background-image: url("sun.jpg");
+
+
+
+}
+.abcd
+{
+  
+  width: 70px;
+  height: 440px;
+  padding-left: 100px;
+  padding-top:130px;
+}
+
+hr 
+{
+  border-top: 2px solid black;
+}
+
+#section2 {padding-top:40px;color: black; font-size: 30px; background-color:#337ab7;} 
+#section3 {padding-top:30px; padding-bottom:60px;color: white; font-size: 28px;  background-color:#101010;} 
+#section4 {padding-top:60px;color: white; padding-bottom:60px;font-size: 30px; background-color:#337ab7;} 
+#section5 {padding-top:70px;color:#337ab7; font-size: 30px;  background-color:#101010;} 
+
+.profile-box
+{
+    width: 100%;
+    max-width: 960px;
+    margin: 4% 14%;
+    position: absolute;
+    padding-bottom: 30px;
+    background-color: #e5e4e2;
+}
+.p-0 {
+	padding:0 !important;
+}
+.m-0 {
+	margin:0 !important;
+}
+.information p
+{
+    margin-top: 120px;
+    margin-bottom: 30px;
+    text-align: center;
+    font-size: 18px;
+    line-height: 28px;
+    color: white;
+    word-break: initial;
+}
+
+.profile-img 
+{
+	margin-top:90px;
+	height:305px;
+}
+.navbar-brand {
+    color: #fff !important;
+    font-weight: 600;
+    font-size: 22px;
+}
+@media only screen and (max-width: 767px) 
+{
+  .profile-box
+	{
+		 margin:0 auto !important;
+		    padding: 0;
+			position:relative;
+	}
+	.profile-img {
+		    height: auto;
+    margin: 0 auto;
+    width: 100%;
+	}
+	.rw-wrapper {
+		    margin: 0;
+    padding: 15px;
+    width: 100%;
+	}
+	.bg-grey {
+		    background: #f5f5f5;
+	}
+	.information p {
+		    margin: 0;
+    padding: 15px;
+	}
+	#section1 {
+    color: black;
+	    padding-top: 50px;
+
+    background-color: black;
+    padding-bottom: 0;
+	    height: unset;
+	}
+}
+.well
+{
+background-color: black !important;
+}
+.m-t-50 {
+ margin-top:50px;
+}
+.footer-copyright {
+	color:#fff;
+	padding:10px;
+}
+
+</style> 
+</head> 
+
+<body data-spy="scroll" data-target=".navbar" data-offset="50"> 
+
+
+<nav class="navbar navbar-inverse navbar-fixed-top"> 
+<div class="container-fluid"> 
+	<div class="navbar-header"> 
+		<button type="button" class="navbar-toggle"data-toggle="collapse" data-target="#myNavbar"> 
+		<span class="icon-bar"></span> 
+		<span class="icon-bar"></span> 
+		<span class="icon-bar"></span>						 
+	</button> 
+	<a class="navbar-brand" href="#">SAIGOKU</a> 
+	</div> 
+	<div> 
+	<div class="collapse navbar-collapse" id="myNavbar"> 
+		<ul class="nav navbar-nav navbar-right"> 
+		<li><a href="#section1">ABOUT</a></li> 
+		<li><a href="#section2">ACADEMICS</a></li> 
+		<li><a href="#section3">TECHNICAL SKILLS</a></li> 
+		<li><a href="#section4">WORKSHOPS ATTENDED</a></li> 
+		<li><a href="#section5">HOBBIES</a></li> 
+		<li><a href="#section6">CONTACT</a></li> 
+		</ul> 
+	</div> 
+	</div> 
+	
+</div> 
+</nav>	 
+
+
+
+
+<div id="section1" class="container-fluid"> 
+
+<div class="container profile-box">
+<div class="row">
+<div class="col-md-4 p-0">
+<center><img class="img-responsive profile-img" src="Capture.PNG" alt="photo" ></center>
+</section>
+</div>
+
+<div class="col-md-8 p-0 bg-grey">
+<section class="rw-wrapper">
+	<h3 class="rw-sentence">
+		<span>I</span>
+		<div class="rw-words rw-words-1">
+			<span>AM SAI PRAKASH</span>
+			<span>AM FROM CHENNAI</span>
+		</div>
+		</br>
+		<span>AND I LOVE</span>
+		<div class="rw-words rw-words-2">
+			<span>DEVELOPING</span>
+			<span>CLASSICAL ROCK MUSIC</span>
+	    </div>
+	</h3>
+	<hr>
+	</hr>
+	</br>
+	
+	
+	<div class="row">
+    <div class="col-xs-4" >
+	
+	<h4 style="font-weight:400"> Age </h4>        
+	
+     
+    <h4 style="font-weight:400">Phone </h4>    
+    <h4 style="font-weight:400">Graduation</h4>  
+	<h4 style="font-weight:400">E-mail</h4> 
+    <br />
+    <h4 style="font-weight:400">Address</h4>	
+	</div>
+	
+	<div class="col-xs-8 " style="padding-right:40px">
+	<h4 style="font-weight:600">21</h4>
+	<h4 style="font-weight:600">7868098678</h4>
+    <h4 style="font-weight:600">May24,2019</h4>
+	<h4 style="font-weight:600">sai.prakashaom@gmail.com</h4>
+	<h4 style="font-weight:600; word-break: initial;">No.8,Periyar <br/>Nagar,Karthikeyapuram Road,Tiruttani,PIN-631 209.</h4>
+    </div>
+
+	
+</section>
+
+</div>
+</div>
+</div>
+</div>
+
+
+<div class="container information">
+<div class="col-md-offset-2 col-md-8">
+<p>Hi,I am Sai Prakash.I completed my bachelor's degree on  information technology at sri venkateswara college of engineering and i am currently working as a Trainee-Developer at Maantt Global services,Eakatuthangal.I love watching Anime and other tv shows and hitting  books and i love classical rock music genre especially led zeppelin, beatles,queen.</p>
+</div>
+</div>
+
+<div id="section2" class="container-fluid"> 
+
+<center><h3><div style="color:white" ;">ACADEMICS</div></h3></center>
+
+  <div class="page">
+  <div class="timeline">
+    
+	<div class="timeline__group">
+      <span class="timeline__year">2013</span>
+      <div class="timeline__box">
+        <div class="timeline__post">
+          <div class="timeline__content">
+             <ul class="list-unstyled">
+			 <li style="font-weight:bolder;font-size: 20px;">S.S.L.C</li>
+			 <li style= "font-size: 20px">Bharathidhasanar Matric Hr Sec School</li>
+			 <li style= "font-size: 20px">95%</li>
+			</ul>
+          </div>
+        </div>
+      </div>
+	  </div>
+	  
+	  
+	  <div class="timeline__group">
+	  <span class="timeline__year">2015</span>
+      <div class="timeline__box">
+        <div class="timeline__post">
+          <div class="timeline__content">
+            <ul class="list-unstyled">
+			<li style="font-weight:bolder;font-size: 20px;">H.S.C</li>
+			<li style= "font-size: 20px">SRV Boys Hr Sec School</li>
+			<li style= "font-size: 20px">87%</li>
+			</ul>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+	
+	<div class="timeline__group">
+      <span class="timeline__year">2019</span>
+      <div class="timeline__box">
+        <div class="timeline__post">
+          <div class="timeline__content">
+            <ul class="list-unstyled">
+			<li style="font-weight:bolder; font-size: 20px;">Btech IT</li>
+			<li style= "font-size: 20px";>Sri Venkateswara College of engineering</li>
+			<li style= "font-size: 20px";>68%</li>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+</div>
+</div>
+ 
+</div>
+
+
+<div id="section3" class="container-fluid"> 
+<div class="container">
+<h3 class="text-center"><div style="color:white">TECHNICAL BACKGROUND</div></h3>
+
+	 <div class="row m-t-50">
+        <div class="col-md-2">
+	    <img src="html.png" alt="C"  class="img-responsive center-block" width="120">
+		</div>
+		
+		<div class="col-md-4">
+		<h3> HTML,CSS,Bootstrap</h3>
+		<div class="progress">
+        <div class="progress-bar progress-bar-success progress-bar-striped active" role="progressbar"
+          aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width:40%"></div>
+        </div>
+		</div>
+		
+	
+		
+		<div class="col-md-2" style="padding-top:20px">
+	    <img src="c.png" alt="C" class="img-responsive center-block" width="60">
+		</div>
+		
+		<div class="col-md-4">
+		<h3> C  </h3>
+		<div class="progress">
+        <div class="progress-bar progress-bar-success progress-bar-striped active" role="progressbar"
+          aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width:50%" ></div>
+        </div>
+		</div>
+		</div>
+		
+		
+	    
+	<div class="row" style="margin-top:50px;">
+        <div class="col-md-2">	
+	    <img src="please.png" alt="C#" class="img-responsive center-block" width="120">	
+		</div>
+		
+		<div class="col-md-4">	
+		<h3> C# </h3>
+		<div class="progress">
+        <div class="progress-bar progress-bar-success progress-bar-striped active" role="progressbar"
+          aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width:60%"></div>
+        </div>
+		
+		</div>
+		
+        <div class="col-md-2">
+	   <img src="java1.png" alt="java" class="img-responsive center-block" width="120" >
+	   </div>
+	   
+	    <div class="col-md-4">
+		<h3 style= "padding-left:20px";> Java </h3>
+		<div class="progress">
+        <div class="progress-bar progress-bar-success progress-bar-striped active" role="progressbar"
+          aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width:30%"></div>
+        </div>
+		
+		</div>
+		</div>
+	    </div>
+</div> 
+
+
+<div id="section4" class="container-fluid"> 
+<div class="container">
+<center><h3><div  style="color:white">WORKSHOPS ATTENDED</div></h3></center>
+
+      <div class="row">
+      <div class="col-md-2" style="margin-top:80px ">
+      <center><img src="react.png" alt="React-js" style="width:55%" align="top left"></center>
+	  </div>
+	   <div class="col-md-4" style="margin-top:70px ">
+	  <h4 style="text-align: left; line-height: 30px; font-weight: 400;  word-break: initial; ">*Attended a one day workshop on React-js at sri venkateswara college of engineering. And hosted a small website of a small kind.</h4>
+	  </div>
+	  <div class="col-md-2" style="margin-top:80px">
+	  <center><img src="Python.png" alt="React-js" style="width:40%" align=" middle-right"></center>
+	  </div>
+	  <div class="col-md-4" style="margin-top:70px">
+	  <h4 style="text-align: left; line-height: 30px; font-weight: 400;  word-break: initial;">*Attended a one day worksop on basic python at MIT,chrompet.And learned some basic insights inside the python programming language.</h4>
+	  </div>
+	  </div>
+      </div>
+</div>
+
+<div id="section5" class="container-fluid">
+<div class="container">
+ <center><h3><div  style="color:white ">HOBBIES</div></h3></center>
+ 
+	 <div class="row">
+      <div class="col-md-6" style="margin-top:80px ">
+	  <div class="text-center">
+	   <center><img src="alanwatt.jpg" alt="book" style="width:30%;  border-radius: 50%;" align="middle"></center>
+	   <h3 style="color:white">Books</h3>
+	   <h4 style="margin-top:27px; text-align:center; color:white; line-height: 170%;  font-weight: 400;  word-break: initial;">The outliers,rich dad poor dad,dale carnegie's-how to stop worrying and start living,the man's search for meaning in life,the 48 laws of power,Bhagavad geeta and the list goes on just like that...</h4>
+	   <br \>
+	   </div>
+	    </div>
+	
+	   <div class="col-md-6" style="margin-top:85px ">
+	   <div class="text-center">
+	   <center><img src="led.jpg" alt="netflix" style="width:201px; height:174px; border-radius: 90%;  word-break: initial;" align="middle"></center>
+	   <h3 style="color:white">Music</h3>
+	   <h4 style="margin-top:30px; text-align:center; color:white; line-height: 170%;  font-weight: 400;">From ilaiyaraja to led zeppelin i love all kinds of music especially classical rock genre. my favourite bands goes on like led zeppelin,queen,beatles,coldplay,imagine dragons,Eminem,twenty one pilots ,the rolling stones,the cranberries,Eagles etc...</h4>
+	   
+	   </div>
+	   </div>
+	   </div>
+	   
+	   <br/>
+	   <div class="row">
+	   <div class="col-md-6">
+	    <div class="text-center">
+	   <center><img src="itachi.jpg" alt="netflix" style="width:190px; height:170px;  border-radius: 50%;  word-break: initial;" align="top left"></center>
+	   <h3 style="color:white">Anime</h3>
+	   <h4 style="margin-top:30px; text-align:center; color:white; line-height: 170%;  font-weight: 400;">I watch a lot of japanese animation tv shows and other tv series and my fav ones are one piece,dragonballz,deathnote,bleach,naruto,fairy tail,Detective Academy Q.</h4>
+       </div>
+	   </div>
+	   <div class="col-md-6">
+	   <center><img src="supernatural.jpg" alt="netflix" style="width:250px; height:179px;  border-radius: 50%;  word-break: initial;" align="top left"></center>
+	   <center><h3 style="color:white">TV series</h3></center>
+	   <center><h4 style="margin-top:20px; text-align:center; color:white; line-height: 170%;  font-weight: 400;">The Supernatural,Game of thrones,Friends,Fresh prince of bel-air,Into the badlands,Marvel's Punisher,Ironfist,Daredevil,Arrow,Flash and i am a big fan of marvel comics universe. </h4></center>
+       </div>
+	   </div>
+</div>
+</div> 
+</div>
+
+   <footer class="page-footer font-small white" style="background-color:#337ab7">
+  <div class="footer-copyright text-center py-3"> © 2019 Copyright &nbsp;
+    <a style="color:white" href="https://sai.prakashaom@gmail.com"> Sai Prakash </a>
+  </div>
+
+</footer>
+
+
+</body> 
+</html> 
